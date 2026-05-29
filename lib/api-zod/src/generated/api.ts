@@ -69,3 +69,79 @@ export const GetGameStatsResponse = zod.object({
 })
 
 
+/**
+ * @summary Manager dashboard overview — key KPIs
+ */
+export const GetManagerOverviewResponse = zod.object({
+  "totalPlays": zod.number(),
+  "avgTotalScore": zod.number(),
+  "avgFriendlyScore": zod.number(),
+  "avgProficientScore": zod.number(),
+  "avgDedicatedScore": zod.number(),
+  "avgHappiness": zod.number(),
+  "topScore": zod.number(),
+  "passRate": zod.number().describe('Percentage of players scoring >= 70'),
+  "avgPaymentErrors": zod.number()
+})
+
+
+/**
+ * @summary Average score per 3T category across all players
+ */
+export const GetModulePerformanceResponse = zod.object({
+  "friendly": zod.number().describe('Average friendly score'),
+  "proficient": zod.number().describe('Average proficient score'),
+  "dedicated": zod.number().describe('Average dedicated score'),
+  "friendlyMax": zod.number().describe('Max possible friendly score (30)'),
+  "proficientMax": zod.number().describe('Max possible proficient score (40)'),
+  "dedicatedMax": zod.number().describe('Max possible dedicated score (30)')
+})
+
+
+/**
+ * @summary How scores are distributed across grade bands
+ */
+export const GetScoreDistributionResponseItem = zod.object({
+  "band": zod.string(),
+  "label": zod.string(),
+  "count": zod.number()
+})
+export const GetScoreDistributionResponse = zod.array(GetScoreDistributionResponseItem)
+
+
+/**
+ * @summary Most recent game sessions
+ */
+export const getRecentPlaysQueryLimitDefault = 20;
+
+export const GetRecentPlaysQueryParams = zod.object({
+  "limit": zod.coerce.number().default(getRecentPlaysQueryLimitDefault)
+})
+
+export const GetRecentPlaysResponseItem = zod.object({
+  "id": zod.number(),
+  "playerName": zod.string(),
+  "totalScore": zod.number(),
+  "friendlyScore": zod.number(),
+  "proficientScore": zod.number(),
+  "dedicatedScore": zod.number(),
+  "happinessPercent": zod.number(),
+  "badge": zod.string(),
+  "avgProcessingSeconds": zod.number().nullish(),
+  "paymentErrors": zod.number().optional(),
+  "createdAt": zod.string()
+})
+export const GetRecentPlaysResponse = zod.array(GetRecentPlaysResponseItem)
+
+
+/**
+ * @summary Count of players at each badge level
+ */
+export const GetBadgeBreakdownResponseItem = zod.object({
+  "badge": zod.string(),
+  "count": zod.number(),
+  "minScore": zod.number()
+})
+export const GetBadgeBreakdownResponse = zod.array(GetBadgeBreakdownResponseItem)
+
+

@@ -6,8 +6,13 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './badgeCount';
 export * from './gameStats';
 export * from './getLeaderboardParams';
+export * from './getRecentPlaysParams';
 export * from './healthStatus';
+export * from './managerOverview';
+export * from './modulePerformance';
 export * from './score';
+export * from './scoreDistributionBand';
 export * from './scoreInput';

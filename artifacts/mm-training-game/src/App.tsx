@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import PlayIndex from "@/pages/play/index";
 import Results from "@/pages/results";
 import Leaderboard from "@/pages/leaderboard";
+import ManagerDashboard from "@/pages/manager";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/play" component={PlayIndex} />
       <Route path="/results" component={Results} />
       <Route path="/leaderboard" component={Leaderboard} />
+      <Route path="/manager" component={ManagerDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

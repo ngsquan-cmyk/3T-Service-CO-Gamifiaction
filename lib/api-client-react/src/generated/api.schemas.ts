@@ -44,7 +44,51 @@ export interface GameStats {
   avgHappiness: number;
 }
 
+export interface ManagerOverview {
+  totalPlays: number;
+  avgTotalScore: number;
+  avgFriendlyScore: number;
+  avgProficientScore: number;
+  avgDedicatedScore: number;
+  avgHappiness: number;
+  topScore: number;
+  /** Percentage of players scoring >= 70 */
+  passRate: number;
+  avgPaymentErrors: number;
+}
+
+export interface ModulePerformance {
+  /** Average friendly score */
+  friendly: number;
+  /** Average proficient score */
+  proficient: number;
+  /** Average dedicated score */
+  dedicated: number;
+  /** Max possible friendly score (30) */
+  friendlyMax: number;
+  /** Max possible proficient score (40) */
+  proficientMax: number;
+  /** Max possible dedicated score (30) */
+  dedicatedMax: number;
+}
+
+export interface ScoreDistributionBand {
+  band: string;
+  label: string;
+  count: number;
+}
+
+export interface BadgeCount {
+  badge: string;
+  count: number;
+  minScore: number;
+}
+
 export type GetLeaderboardParams = {
+limit?: number;
+};
+
+export type GetRecentPlaysParams = {
 limit?: number;
 };
 

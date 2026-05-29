@@ -20,10 +20,15 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  BadgeCount,
   GameStats,
   GetLeaderboardParams,
+  GetRecentPlaysParams,
   HealthStatus,
+  ManagerOverview,
+  ModulePerformance,
   Score,
+  ScoreDistributionBand,
   ScoreInput
 } from './api.schemas';
 
@@ -337,6 +342,398 @@ export function useGetGameStats<TData = Awaited<ReturnType<typeof getGameStats>>
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getGetGameStatsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetManagerOverviewUrl = () => {
+
+
+
+
+  return `/api/manager/overview`
+}
+
+/**
+ * @summary Manager dashboard overview — key KPIs
+ */
+export const getManagerOverview = async ( options?: RequestInit): Promise<ManagerOverview> => {
+
+  return customFetch<ManagerOverview>(getGetManagerOverviewUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetManagerOverviewQueryKey = () => {
+    return [
+    `/api/manager/overview`
+    ] as const;
+    }
+
+
+export const getGetManagerOverviewQueryOptions = <TData = Awaited<ReturnType<typeof getManagerOverview>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getManagerOverview>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetManagerOverviewQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getManagerOverview>>> = ({ signal }) => getManagerOverview({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getManagerOverview>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetManagerOverviewQueryResult = NonNullable<Awaited<ReturnType<typeof getManagerOverview>>>
+export type GetManagerOverviewQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Manager dashboard overview — key KPIs
+ */
+
+export function useGetManagerOverview<TData = Awaited<ReturnType<typeof getManagerOverview>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getManagerOverview>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetManagerOverviewQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetModulePerformanceUrl = () => {
+
+
+
+
+  return `/api/manager/module-performance`
+}
+
+/**
+ * @summary Average score per 3T category across all players
+ */
+export const getModulePerformance = async ( options?: RequestInit): Promise<ModulePerformance> => {
+
+  return customFetch<ModulePerformance>(getGetModulePerformanceUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetModulePerformanceQueryKey = () => {
+    return [
+    `/api/manager/module-performance`
+    ] as const;
+    }
+
+
+export const getGetModulePerformanceQueryOptions = <TData = Awaited<ReturnType<typeof getModulePerformance>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getModulePerformance>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetModulePerformanceQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getModulePerformance>>> = ({ signal }) => getModulePerformance({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getModulePerformance>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetModulePerformanceQueryResult = NonNullable<Awaited<ReturnType<typeof getModulePerformance>>>
+export type GetModulePerformanceQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Average score per 3T category across all players
+ */
+
+export function useGetModulePerformance<TData = Awaited<ReturnType<typeof getModulePerformance>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getModulePerformance>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetModulePerformanceQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetScoreDistributionUrl = () => {
+
+
+
+
+  return `/api/manager/score-distribution`
+}
+
+/**
+ * @summary How scores are distributed across grade bands
+ */
+export const getScoreDistribution = async ( options?: RequestInit): Promise<ScoreDistributionBand[]> => {
+
+  return customFetch<ScoreDistributionBand[]>(getGetScoreDistributionUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetScoreDistributionQueryKey = () => {
+    return [
+    `/api/manager/score-distribution`
+    ] as const;
+    }
+
+
+export const getGetScoreDistributionQueryOptions = <TData = Awaited<ReturnType<typeof getScoreDistribution>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getScoreDistribution>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetScoreDistributionQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getScoreDistribution>>> = ({ signal }) => getScoreDistribution({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getScoreDistribution>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetScoreDistributionQueryResult = NonNullable<Awaited<ReturnType<typeof getScoreDistribution>>>
+export type GetScoreDistributionQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary How scores are distributed across grade bands
+ */
+
+export function useGetScoreDistribution<TData = Awaited<ReturnType<typeof getScoreDistribution>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getScoreDistribution>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetScoreDistributionQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetRecentPlaysUrl = (params?: GetRecentPlaysParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/manager/recent-plays?${stringifiedParams}` : `/api/manager/recent-plays`
+}
+
+/**
+ * @summary Most recent game sessions
+ */
+export const getRecentPlays = async (params?: GetRecentPlaysParams, options?: RequestInit): Promise<Score[]> => {
+
+  return customFetch<Score[]>(getGetRecentPlaysUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetRecentPlaysQueryKey = (params?: GetRecentPlaysParams,) => {
+    return [
+    `/api/manager/recent-plays`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetRecentPlaysQueryOptions = <TData = Awaited<ReturnType<typeof getRecentPlays>>, TError = ErrorType<unknown>>(params?: GetRecentPlaysParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetRecentPlaysQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getRecentPlays>>> = ({ signal }) => getRecentPlays(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetRecentPlaysQueryResult = NonNullable<Awaited<ReturnType<typeof getRecentPlays>>>
+export type GetRecentPlaysQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Most recent game sessions
+ */
+
+export function useGetRecentPlays<TData = Awaited<ReturnType<typeof getRecentPlays>>, TError = ErrorType<unknown>>(
+ params?: GetRecentPlaysParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetRecentPlaysQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetBadgeBreakdownUrl = () => {
+
+
+
+
+  return `/api/manager/badge-breakdown`
+}
+
+/**
+ * @summary Count of players at each badge level
+ */
+export const getBadgeBreakdown = async ( options?: RequestInit): Promise<BadgeCount[]> => {
+
+  return customFetch<BadgeCount[]>(getGetBadgeBreakdownUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetBadgeBreakdownQueryKey = () => {
+    return [
+    `/api/manager/badge-breakdown`
+    ] as const;
+    }
+
+
+export const getGetBadgeBreakdownQueryOptions = <TData = Awaited<ReturnType<typeof getBadgeBreakdown>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBadgeBreakdown>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetBadgeBreakdownQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getBadgeBreakdown>>> = ({ signal }) => getBadgeBreakdown({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getBadgeBreakdown>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetBadgeBreakdownQueryResult = NonNullable<Awaited<ReturnType<typeof getBadgeBreakdown>>>
+export type GetBadgeBreakdownQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary Count of players at each badge level
+ */
+
+export function useGetBadgeBreakdown<TData = Awaited<ReturnType<typeof getBadgeBreakdown>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBadgeBreakdown>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetBadgeBreakdownQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

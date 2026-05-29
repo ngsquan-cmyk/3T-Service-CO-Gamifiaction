@@ -50,8 +50,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="text-sm text-muted-foreground">
+        <div className="text-sm text-muted-foreground flex flex-col items-center gap-4">
           <p>Mục tiêu: Đạt 100 điểm và làm hài lòng khách hàng.</p>
+          <Link href="/manager" className="text-xs text-muted-foreground/60 hover:text-primary transition-colors">
+            Quản lý
+          </Link>
         </div>
       </motion.div>
     </div>

@@ -12,6 +12,8 @@ tags:
     description: Health operations
   - name: game
     description: Game scores and leaderboard
+  - name: manager
+    description: Manager analytics dashboard
 paths:
   /healthz:
     get:
@@ -79,6 +81,83 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GameStats"
+
+  /manager/overview:
+    get:
+      operationId: getManagerOverview
+      tags: [manager]
+      summary: Manager dashboard overview — key KPIs
+      responses:
+        "200":
+          description: Overview KPIs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManagerOverview"
+
+  /manager/module-performance:
+    get:
+      operationId: getModulePerformance
+      tags: [manager]
+      summary: Average score per 3T category across all players
+      responses:
+        "200":
+          description: Per-category performance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModulePerformance"
+
+  /manager/score-distribution:
+    get:
+      operationId: getScoreDistribution
+      tags: [manager]
+      summary: How scores are distributed across grade bands
+      responses:
+        "200":
+          description: Score distribution
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ScoreDistributionBand"
+
+  /manager/recent-plays:
+    get:
+      operationId: getRecentPlays
+      tags: [manager]
+      summary: Most recent game sessions
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: Recent sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Score"
+
+  /manager/badge-breakdown:
+    get:
+      operationId: getBadgeBreakdown
+      tags: [manager]
+      summary: Count of players at each badge level
+      responses:
+        "200":
+          description: Badge counts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BadgeCount"
 
 components:
   schemas:
@@ -171,4 +250,94 @@ components:
         topScore:
           type: integer
         avgHappiness:
+          type: integer
+
+    ManagerOverview:
+      type: object
+      required:
+        - totalPlays
+        - avgTotalScore
+        - avgFriendlyScore
+        - avgProficientScore
+        - avgDedicatedScore
+        - avgHappiness
+        - topScore
+        - passRate
+        - avgPaymentErrors
+      properties:
+        totalPlays:
+          type: integer
+        avgTotalScore:
+          type: integer
+        avgFriendlyScore:
+          type: integer
+        avgProficientScore:
+          type: integer
+        avgDedicatedScore:
+          type: integer
+        avgHappiness:
+          type: integer
+        topScore:
+          type: integer
+        passRate:
+          type: integer
+          description: Percentage of players scoring >= 70
+        avgPaymentErrors:
+          type: number
+
+    ModulePerformance:
+      type: object
+      required:
+        - friendly
+        - proficient
+        - dedicated
+        - friendlyMax
+        - proficientMax
+        - dedicatedMax
+      properties:
+        friendly:
+          type: integer
+          description: Average friendly score
+        proficient:
+          type: integer
+          description: Average proficient score
+        dedicated:
+          type: integer
+          description: Average dedicated score
+        friendlyMax:
+          type: integer
+          description: Max possible friendly score (30)
+        proficientMax:
+          type: integer
+          description: Max possible proficient score (40)
+        dedicatedMax:
+          type: integer
+          description: Max possible dedicated score (30)
+
+    ScoreDistributionBand:
+      type: object
+      required:
+        - band
+        - count
+        - label
+      properties:
+        band:
+          type: string
+        label:
+          type: string
+        count:
+          type: integer
+
+    BadgeCount:
+      type: object
+      required:
+        - badge
+        - count
+        - minScore
+      properties:
+        badge:
+          type: string
+        count:
+          type: integer
+        minScore:
           type: integer
