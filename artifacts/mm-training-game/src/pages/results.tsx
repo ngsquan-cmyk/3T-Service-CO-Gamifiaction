@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
+import { Award } from "lucide-react";
 import { useGame } from "@/lib/game-context";
 import { useSoundEffects } from "@/hooks/use-sound";
 import { Button } from "@/components/ui/button";
@@ -122,6 +123,19 @@ export default function Results() {
           </div>
         ) : (
           <div className="space-y-3">
+            <Link
+              href={`/certificate?name=${encodeURIComponent(name)}&score=${totalScore}&badge=${encodeURIComponent(badge)}&friendly=${state.friendlyScore}&proficient=${state.proficientScore}&dedicated=${state.dedicatedScore}&happiness=${state.happinessPercent}&date=${new Date().toISOString().split("T")[0]}`}
+              className="w-full block"
+            >
+              <Button
+                size="lg"
+                className="w-full h-14 rounded-xl text-lg font-bold bg-[#C8A951] hover:bg-[#b8973f] text-white gap-2"
+                data-testid="button-view-certificate"
+              >
+                <Award className="h-5 w-5" />
+                Xem Chứng Chỉ
+              </Button>
+            </Link>
             <Link href="/leaderboard" className="w-full block">
               <Button size="lg" className="w-full h-14 rounded-xl text-lg font-bold bg-primary hover:bg-primary/90">
                 Xem Bảng Xếp Hạng

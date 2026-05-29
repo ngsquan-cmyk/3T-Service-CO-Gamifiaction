@@ -12,6 +12,7 @@ import ManagerDashboard from "@/pages/manager";
 import NotFound from "@/pages/not-found";
 import QuickChallenge from "@/pages/quick-challenge";
 import SettingsPage from "@/pages/settings";
+import Certificate from "@/pages/certificate";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/leaderboard" component={Leaderboard} />
       <Route path="/manager" component={ManagerDashboard} />
       <Route path="/settings" component={SettingsPage} />
+      <Route path="/certificate" component={Certificate} />
       <Route component={NotFound} />
     </Switch>
   );
