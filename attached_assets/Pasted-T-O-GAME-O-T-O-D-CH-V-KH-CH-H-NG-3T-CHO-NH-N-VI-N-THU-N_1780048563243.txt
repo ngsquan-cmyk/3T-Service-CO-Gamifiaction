@@ -1,0 +1,260 @@
+TẠO GAME ĐÀO TẠO DỊCH VỤ KHÁCH HÀNG 3T CHO NHÂN VIÊN THU NGÂN MM MEGA MARKET
+MỤC TIÊU CHUNG
+Tạo một game đào tạo tương tác trên nền tảng web dành cho nhân viên Thu ngân MM Mega Market.
+Mục tiêu không phải chỉ để học quy trình mà để thay đổi tư duy:
+"Tôi không chỉ thu tiền. Tôi là người tạo trải nghiệm cuối cùng của khách hàng tại MM."
+Người chơi sẽ học và thực hành mô hình Dịch vụ Khách hàng 3T:
+1. THÂN THIỆN
+•	Đồng phục chỉnh tề
+•	Áo sơ mi bỏ trong quần
+•	Đeo bảng tên
+•	Tươi cười
+•	Chủ động chào khách hàng, hỗ trợ, phục vụ khách hàng
+2. THÀNH THẠO
+•	Thanh toán nhanh
+•	Thanh toán chính xác
+•	Xử lý tình huống đúng
+•	Tư vấn chính xác
+•	Sử dụng POS thành thạo
+3. TẬN TÂM
+•	Lắng nghe khách hàng
+•	Chủ động hỗ trợ
+•	Phục vụ bằng trái tim
+•	Đặt mình vào vị trí khách hàng
+Thông điệp xuyên suốt:
+"Khách hàng không nhớ chúng ta bán gì. Khách hàng nhớ cảm xúc chúng ta mang lại cho họ."
+________________________________________
+BỐI CẢNH GAME
+Người chơi vào vai:
+Nhân viên Thu ngân mới của MM Mega Market.
+Bắt đầu từ:
+"Nhân viên mới"
+Mục tiêu cuối cùng:
+"Đại sứ Dịch vụ Khách hàng MM"
+________________________________________
+GIAO DIỆN
+Mô phỏng thực tế MM:
+•	Khu vực quầy thu ngân
+•	Khách hàng thật
+•	Xe đẩy hàng
+•	Máy POS
+•	Máy quét barcode
+•	Hóa đơn
+•	Thẻ thành viên Mcard
+•	Khu vực thanh toán
+Nhân vật:
+Nhân viên MM
+•	Mặc đồng phục MM (áo Tshirt màu xanh, cổ đỏ, logo MM trên ngực trái)
+•	Áo sơ mi bỏ trong quần
+•	Đeo bảng tên
+•	Hình ảnh chuyên nghiệp
+Khách hàng
+•	Gia đình
+•	Người cao tuổi
+•	Mẹ có con nhỏ
+•	Chủ nhà hàng
+•	Khách mua số lượng lớn
+•	Khách khó tính
+•	Khách đang vội
+________________________________________
+CƠ CHẾ ĐIỂM
+Điểm Dịch Vụ
+100 điểm
+Thân thiện
+30 điểm
+Thành thạo
+40 điểm
+Tận tâm
+30 điểm
+________________________________________
+CHỈ SỐ CẢM XÚC KHÁCH HÀNG
+Customer Happiness Meter
+😡 Không hài lòng
+😐 Bình thường
+🙂 Hài lòng
+😍 Rất hài lòng
+Mỗi hành động của người chơi sẽ làm thanh cảm xúc tăng hoặc giảm.
+________________________________________
+HỆ THỐNG NĂNG LỰC
+Game được thiết kế theo 6 năng lực.
+________________________________________
+NĂNG LỰC 1
+ẤN TƯỢNG ĐẦU TIÊN
+Mục tiêu:
+Giúp người chơi hiểu:
+Khách hàng đánh giá MM ngay từ ánh nhìn đầu tiên.
+Tình huống
+Chuẩn bị vào ca làm việc.
+Người chơi chọn:
+□ Đeo bảng tên
+□ Áo bỏ trong quần
+□ Tươi cười
+□ Kiểm tra diện mạo
+Nếu bỏ qua:
+Khách hàng đánh giá thấp.
+Popup:
+"Khách hàng nhìn thấy bạn trước khi nhìn thấy hóa đơn."
+________________________________________
+NĂNG LỰC 2
+CHÀO HỎI THÂN THIỆN
+Khách đến quầy.
+Người chơi chọn:
+A.
+"Tiếp theo."
+B.
+"Xin chào Anh/Chị."
+C.
+Im lặng.
+Đáp án đúng:
+B
+Khách hàng tăng mức hài lòng.
+________________________________________
+NĂNG LỰC 3
+THANH TOÁN THÀNH THẠO
+Mini Game
+Quét hàng.
+Người chơi phải:
+•	Quét đúng mã
+•	Không bỏ sót
+•	Không quét trùng
+•	Phân loại mã hàng trước khi quét
+•	Quét hàng hóa của khách ở dưới xe đẩy trước, ở trên băng chuyền sau
+Có đồng hồ đếm giờ.
+Nếu:
+Quét sai
+=> khách khó chịu
+Nếu:
+Nhanh + đúng
+=> khách hài lòng
+________________________________________
+NĂNG LỰC 4
+TƯ VẤN ĐÚNG
+Khách hỏi:
+"Tôi muốn mua dầu ăn cho nhà hàng."
+Người chơi phải chọn:
+Sản phẩm phù hợp: Happy Price 25KG, Cái Lân 25Kg, Happy Price 9kg, Cái Lân 9Kg
+Nếu tư vấn sai:
+Khách không hài lòng.
+Nếu tư vấn đúng:
+Khách quay lại mua.
+________________________________________
+NĂNG LỰC 5
+TẬN TÂM PHỤC VỤ
+Tình huống:
+Khách lớn tuổi mua hàng nặng/ cồng kềnh và nhiều hàng
+Người chơi chọn:
+A. Chờ khách tự xử lý
+B. Hỗ trợ đóng gói
+C. Gọi bảo vệ hỗ trợ
+D. Nhẹ nhàng nói với khách cứ để hàng nặng, cồng kềnh trên xe đẩy không cần đưa lên băng chuyền
+Đáp án tốt nhất:
+B + C + D
+Thông điệp:
+"Tận tâm là làm một điều nhỏ nhưng ý nghĩa với khách hàng để khách hàng cảm thấy được quan tâm."
+________________________________________
+NĂNG LỰC 6
+XỬ LÝ KHÁCH HÀNG KHÓ TÍNH
+Tình huống:
+Khách phàn nàn:
+"Tôi phải chờ quá lâu."
+Người chơi chọn:
+A.
+"Không phải lỗi của tôi."
+B.
+"Anh/chị thông cảm."
+C.
+"Em xin lỗi vì Anh/Chị phải chờ. Em sẽ hỗ trợ ngay."
+D.
+Do có nhiều nhân viên nghỉ trong ca này
+Đáp án:
+C
+________________________________________
+MINI GAME THỬ THÁCH
+Challenge 1
+Giờ cao điểm
+10 khách hàng liên tiếp
+Mục tiêu:
+Nhanh + đúng + thân thiện
+________________________________________
+Challenge 2
+Khách hàng VIP
+Không được sai hóa đơn.
+________________________________________
+Challenge 3
+Khách hàng khó tính
+Kiểm tra kỹ năng giao tiếp.
+________________________________________
+Challenge 4
+Gia đình có trẻ nhỏ
+Đánh giá sự tận tâm.
+________________________________________
+POPUP GIẢI THÍCH
+Sau mỗi tình huống.
+Ví dụ:
+"Khách hàng không chỉ mua sản phẩm. Họ mua trải nghiệm."
+"Thái độ tích cực giúp khách hàng dễ bỏ qua những bất tiện nhỏ."
+"Một nụ cười có thể tạo nên sự khác biệt."
+________________________________________
+ÂM THANH
+Đúng:
+✓ Tiếng vỗ tay
+Khách hài lòng:
+👏 Tuyệt vời
+Sai:
+✗ Beep
+Khách phàn nàn:
+😟 Oh no
+Hoàn thành:
+🎉 Chúc mừng bạn đã hoàn thành
+________________________________________
+HỆ THỐNG HUY HIỆU
+🥉 Thu ngân giỏi chuyên môn
+🥈 Thu ngân chuyên nghiệp
+🥇 Chuyên gia dịch vụ khách hàng
+🏆 Đại sứ 3T MM 
+🌟 Ngôi sao trải nghiệm khách hàng
+________________________________________
+CHƠI LẠI
+Nếu trả lời sai:
+Không báo "Sai".
+Thay bằng:
+"Hãy thử đặt mình vào vị trí khách hàng."
+Sau đó:
+•	Giải thích bằng ngôn từ dễ hiểu, kèm ví dụ nếu có
+•	Cho chơi lại
+•	Thử lần nữa
+Mục tiêu là học tập, không phải phán xét.
+________________________________________
+MÀN HÌNH KẾT THÚC
+Hiển thị:
+Điểm Thân thiện
+Điểm Thành thạo
+Điểm Tận tâm
+Điểm tổng
+Mức độ hài lòng khách hàng
+Nhận xét
+Ví dụ:
+🌟🌟🌟🌟🌟
+Bạn đã trở thành Đại sứ Dịch vụ Khách hàng MM.
+Khách hàng hài lòng: 96%
+Thời gian xử lý trung bình: 42 giây/khách
+Sai sót thanh toán: 0
+Nút:
+•	Chơi lại
+•	Chơi cấp độ khó hơn
+•	Xem bảng xếp hạng
+________________________________________
+YÊU CẦU KỸ THUẬT
+•	Responsive web, Android Chrome and iPhone Safari 
+•	Có animation
+•	Có âm thanh
+•	Có đồng hồ đếm giờ
+•	Có lưu điểm
+•	Có bảng xếp hạng
+•	Có popup hướng dẫn
+•	Có chế độ chơi lại
+•	Có hệ thống huy hiệu
+•	Có AI phản hồi theo từng hành vi người chơi
+Mục tiêu cuối cùng:
+Biến nhân viên Thu ngân từ "người thực hiện giao dịch" thành "người tạo ra trải nghiệm khách hàng xuất sắc theo tiêu chuẩn 3T của MM Mega Market".
+

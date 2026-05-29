@@ -3,13 +3,15 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: MM Mega Market 3T Training Game API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: game
+    description: Game scores and leaderboard
 paths:
   /healthz:
     get:
@@ -24,6 +26,60 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /game/scores:
+    post:
+      operationId: submitScore
+      tags: [game]
+      summary: Submit a game score
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScoreInput"
+      responses:
+        "201":
+          description: Score submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Score"
+
+  /game/leaderboard:
+    get:
+      operationId: getLeaderboard
+      tags: [game]
+      summary: Get top scores leaderboard
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: Top scores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Score"
+
+  /game/stats:
+    get:
+      operationId: getGameStats
+      tags: [game]
+      summary: Get overall game statistics
+      responses:
+        "200":
+          description: Stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameStats"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +90,85 @@ components:
       required:
         - status
 
+    ScoreInput:
+      type: object
+      required:
+        - playerName
+        - totalScore
+        - friendlyScore
+        - proficientScore
+        - dedicatedScore
+        - happinessPercent
+        - badge
+      properties:
+        playerName:
+          type: string
+        totalScore:
+          type: integer
+        friendlyScore:
+          type: integer
+        proficientScore:
+          type: integer
+        dedicatedScore:
+          type: integer
+        happinessPercent:
+          type: integer
+        badge:
+          type: string
+        avgProcessingSeconds:
+          type: ["integer", "null"]
+        paymentErrors:
+          type: integer
+
+    Score:
+      type: object
+      required:
+        - id
+        - playerName
+        - totalScore
+        - friendlyScore
+        - proficientScore
+        - dedicatedScore
+        - happinessPercent
+        - badge
+        - createdAt
+      properties:
+        id:
+          type: integer
+        playerName:
+          type: string
+        totalScore:
+          type: integer
+        friendlyScore:
+          type: integer
+        proficientScore:
+          type: integer
+        dedicatedScore:
+          type: integer
+        happinessPercent:
+          type: integer
+        badge:
+          type: string
+        avgProcessingSeconds:
+          type: ["integer", "null"]
+        paymentErrors:
+          type: integer
+        createdAt:
+          type: string
+
+    GameStats:
+      type: object
+      required:
+        - totalPlays
+        - avgScore
+        - topScore
+        - avgHappiness
+      properties:
+        totalPlays:
+          type: integer
+        avgScore:
+          type: integer
+        topScore:
+          type: integer
+        avgHappiness:
+          type: integer
