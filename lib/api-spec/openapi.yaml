@@ -159,6 +159,53 @@ paths:
                 items:
                   $ref: "#/components/schemas/BadgeCount"
 
+  /manager/settings:
+    get:
+      operationId: getSettings
+      tags: [manager]
+      summary: Get current game settings
+      responses:
+        "200":
+          description: Current settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameSettings"
+    put:
+      operationId: updateSettings
+      tags: [manager]
+      summary: Update game settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GameSettingsInput"
+      responses:
+        "200":
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameSettings"
+
+  /manager/reset-scores:
+    post:
+      operationId: resetScores
+      tags: [manager]
+      summary: Delete all scores (use with caution)
+      responses:
+        "200":
+          description: Scores cleared
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [deleted]
+                properties:
+                  deleted:
+                    type: integer
+
 components:
   schemas:
     HealthStatus:
@@ -340,4 +387,55 @@ components:
         count:
           type: integer
         minScore:
+          type: integer
+
+    GameSettings:
+      type: object
+      required:
+        - id
+        - storeName
+        - passingScore
+        - quickChallengeTimer
+        - activeModules
+        - customMessages
+        - showLeaderboardOnHome
+        - maxLeaderboardEntries
+      properties:
+        id:
+          type: integer
+        storeName:
+          type: string
+        passingScore:
+          type: integer
+          description: Minimum score to be considered passing (default 70)
+        quickChallengeTimer:
+          type: integer
+          description: Seconds per question in quick challenge (default 15)
+        activeModules:
+          type: string
+          description: Comma-separated module IDs that are active e.g. "1,2,3,4,5,6"
+        customMessages:
+          type: string
+          description: Pipe-separated custom motivational messages, empty string means use defaults
+        showLeaderboardOnHome:
+          type: boolean
+        maxLeaderboardEntries:
+          type: integer
+
+    GameSettingsInput:
+      type: object
+      properties:
+        storeName:
+          type: string
+        passingScore:
+          type: integer
+        quickChallengeTimer:
+          type: integer
+        activeModules:
+          type: string
+        customMessages:
+          type: string
+        showLeaderboardOnHome:
+          type: boolean
+        maxLeaderboardEntries:
           type: integer

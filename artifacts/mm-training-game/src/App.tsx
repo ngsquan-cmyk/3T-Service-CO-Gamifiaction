@@ -11,6 +11,7 @@ import Leaderboard from "@/pages/leaderboard";
 import ManagerDashboard from "@/pages/manager";
 import NotFound from "@/pages/not-found";
 import QuickChallenge from "@/pages/quick-challenge";
+import SettingsPage from "@/pages/settings";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/results" component={Results} />
       <Route path="/leaderboard" component={Leaderboard} />
       <Route path="/manager" component={ManagerDashboard} />
+      <Route path="/settings" component={SettingsPage} />
       <Route component={NotFound} />
     </Switch>
   );

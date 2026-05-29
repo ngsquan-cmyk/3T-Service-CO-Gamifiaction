@@ -145,3 +145,51 @@ export const GetBadgeBreakdownResponseItem = zod.object({
 export const GetBadgeBreakdownResponse = zod.array(GetBadgeBreakdownResponseItem)
 
 
+/**
+ * @summary Get current game settings
+ */
+export const GetSettingsResponse = zod.object({
+  "id": zod.number(),
+  "storeName": zod.string(),
+  "passingScore": zod.number().describe('Minimum score to be considered passing (default 70)'),
+  "quickChallengeTimer": zod.number().describe('Seconds per question in quick challenge (default 15)'),
+  "activeModules": zod.string().describe('Comma-separated module IDs that are active e.g. \"1,2,3,4,5,6\"'),
+  "customMessages": zod.string().describe('Pipe-separated custom motivational messages, empty string means use defaults'),
+  "showLeaderboardOnHome": zod.boolean(),
+  "maxLeaderboardEntries": zod.number()
+})
+
+
+/**
+ * @summary Update game settings
+ */
+export const UpdateSettingsBody = zod.object({
+  "storeName": zod.string().optional(),
+  "passingScore": zod.number().optional(),
+  "quickChallengeTimer": zod.number().optional(),
+  "activeModules": zod.string().optional(),
+  "customMessages": zod.string().optional(),
+  "showLeaderboardOnHome": zod.boolean().optional(),
+  "maxLeaderboardEntries": zod.number().optional()
+})
+
+export const UpdateSettingsResponse = zod.object({
+  "id": zod.number(),
+  "storeName": zod.string(),
+  "passingScore": zod.number().describe('Minimum score to be considered passing (default 70)'),
+  "quickChallengeTimer": zod.number().describe('Seconds per question in quick challenge (default 15)'),
+  "activeModules": zod.string().describe('Comma-separated module IDs that are active e.g. \"1,2,3,4,5,6\"'),
+  "customMessages": zod.string().describe('Pipe-separated custom motivational messages, empty string means use defaults'),
+  "showLeaderboardOnHome": zod.boolean(),
+  "maxLeaderboardEntries": zod.number()
+})
+
+
+/**
+ * @summary Delete all scores (use with caution)
+ */
+export const ResetScoresResponse = zod.object({
+  "deleted": zod.number()
+})
+
+

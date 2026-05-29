@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { 
-  Users, TrendingUp, CheckCircle2, Smile, ArrowLeft, Award, Clock, BarChart3 
+  Users, TrendingUp, CheckCircle2, Smile, ArrowLeft, Award, Clock, BarChart3, Settings
 } from "lucide-react";
 import { 
   useGetManagerOverview, 
@@ -121,16 +121,23 @@ export default function ManagerDashboard() {
   return (
     <div className="min-h-[100dvh] bg-slate-50 pb-12">
       <header className="bg-[#003087] text-white py-6 px-4 md:px-8 mb-8 sticky top-0 z-10 shadow-md">
-        <div className="max-w-7xl mx-auto flex items-center gap-4">
-          <Link href="/">
-            <button className="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Back to home">
-              <ArrowLeft className="w-6 h-6" />
-            </button>
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold">Bảng Điều Khiển Quản Lý</h1>
-            <p className="text-blue-100 text-sm mt-1">MM Mega Market — Phân tích đào tạo 3T</p>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <button className="p-2 hover:bg-white/10 rounded-full transition-colors" aria-label="Back to home">
+                <ArrowLeft className="w-6 h-6" />
+              </button>
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold">Bảng Điều Khiển Quản Lý</h1>
+              <p className="text-blue-100 text-sm mt-1">MM Mega Market — Phân tích đào tạo 3T</p>
+            </div>
           </div>
+          <Link href="/settings">
+            <Button variant="ghost" size="icon" className="hover:bg-white/10 text-white hover:text-white" data-testid="button-settings">
+              <Settings className="h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </header>
 

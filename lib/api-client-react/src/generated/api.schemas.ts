@@ -84,11 +84,40 @@ export interface BadgeCount {
   minScore: number;
 }
 
+export interface GameSettings {
+  id: number;
+  storeName: string;
+  /** Minimum score to be considered passing (default 70) */
+  passingScore: number;
+  /** Seconds per question in quick challenge (default 15) */
+  quickChallengeTimer: number;
+  /** Comma-separated module IDs that are active e.g. "1,2,3,4,5,6" */
+  activeModules: string;
+  /** Pipe-separated custom motivational messages, empty string means use defaults */
+  customMessages: string;
+  showLeaderboardOnHome: boolean;
+  maxLeaderboardEntries: number;
+}
+
+export interface GameSettingsInput {
+  storeName?: string;
+  passingScore?: number;
+  quickChallengeTimer?: number;
+  activeModules?: string;
+  customMessages?: string;
+  showLeaderboardOnHome?: boolean;
+  maxLeaderboardEntries?: number;
+}
+
 export type GetLeaderboardParams = {
 limit?: number;
 };
 
 export type GetRecentPlaysParams = {
 limit?: number;
+};
+
+export type ResetScores200 = {
+  deleted: number;
 };
 

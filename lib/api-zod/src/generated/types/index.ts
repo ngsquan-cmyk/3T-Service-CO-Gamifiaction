@@ -7,12 +7,15 @@
  */
 
 export * from './badgeCount';
+export * from './gameSettings';
+export * from './gameSettingsInput';
 export * from './gameStats';
 export * from './getLeaderboardParams';
 export * from './getRecentPlaysParams';
 export * from './healthStatus';
 export * from './managerOverview';
 export * from './modulePerformance';
+export * from './resetScores200';
 export * from './score';
 export * from './scoreDistributionBand';
 export * from './scoreInput';
