@@ -10,6 +10,7 @@ import Results from "@/pages/results";
 import Leaderboard from "@/pages/leaderboard";
 import ManagerDashboard from "@/pages/manager";
 import NotFound from "@/pages/not-found";
+import QuickChallenge from "@/pages/quick-challenge";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +26,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/play" component={PlayIndex} />
+      <Route path="/quick-challenge" component={QuickChallenge} />
       <Route path="/results" component={Results} />
       <Route path="/leaderboard" component={Leaderboard} />
       <Route path="/manager" component={ManagerDashboard} />

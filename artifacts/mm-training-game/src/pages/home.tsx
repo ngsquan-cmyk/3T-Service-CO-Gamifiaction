@@ -42,6 +42,11 @@ export default function Home() {
                 Bắt Đầu
               </Button>
             </Link>
+            <Link href="/quick-challenge" className="w-full block">
+              <Button variant="outline" size="lg" className="w-full h-14 text-lg font-bold rounded-xl border-primary/50 text-primary hover:bg-primary/5">
+                Thử Thách Nhanh ⚡
+              </Button>
+            </Link>
             <Link href="/leaderboard" className="w-full block">
               <Button variant="outline" size="lg" className="w-full h-14 text-lg font-bold rounded-xl">
                 Bảng Xếp Hạng
