@@ -10,11 +10,16 @@ import { useSubmitScore } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Results() {
-  const { state } = useGame();
+  const { state, startGame } = useGame();
   const { gameComplete } = useSoundEffects();
   const submitScore = useSubmitScore();
   const { toast } = useToast();
   const [, setLocation] = useLocation();
+
+  const handlePlayAgain = () => {
+    startGame();
+    setLocation("/play");
+  };
 
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -141,6 +146,15 @@ export default function Results() {
                 Xem Bảng Xếp Hạng
               </Button>
             </Link>
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full h-14 rounded-xl text-lg font-bold border-secondary text-secondary hover:bg-secondary/5"
+              onClick={handlePlayAgain}
+              data-testid="button-play-again"
+            >
+              🔄 Thử Lại
+            </Button>
             <Link href="/" className="w-full block">
               <Button variant="outline" size="lg" className="w-full h-14 rounded-xl text-lg font-bold">
                 Trang Chủ
