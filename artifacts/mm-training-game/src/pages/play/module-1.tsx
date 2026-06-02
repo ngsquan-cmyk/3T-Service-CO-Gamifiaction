@@ -19,7 +19,7 @@ export default function Module1({ onComplete }: { onComplete: () => void }) {
 
   const handleNext = () => {
     if (allChecked) {
-      addFriendly(5);
+      addFriendly(15);
       adjustHappiness(10);
       correct();
       onComplete();

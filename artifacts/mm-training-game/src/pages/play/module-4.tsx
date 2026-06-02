@@ -18,7 +18,7 @@ export default function Module4({ onComplete }: { onComplete: () => void }) {
 
   const handleSelect = (isCorrect: boolean) => {
     if (isCorrect) {
-      addProficient(8);
+      addProficient(15);
       adjustHappiness(10);
       correct();
       onComplete();

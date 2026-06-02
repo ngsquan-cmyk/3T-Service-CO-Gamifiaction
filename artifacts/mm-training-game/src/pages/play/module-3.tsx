@@ -46,9 +46,9 @@ export default function Module3({ onComplete }: { onComplete: () => void }) {
   const handleFinish = () => {
     setFinished(true);
     let pts = 0;
-    if (score > items.length * 0.8) pts = 15;
-    else if (score > items.length * 0.5) pts = 8;
-    else pts = 4;
+    if (score > items.length * 0.8) pts = 25;
+    else if (score > items.length * 0.5) pts = 18;
+    else pts = 10;
     
     addProficient(pts);
     correct();

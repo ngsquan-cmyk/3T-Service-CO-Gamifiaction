@@ -31,8 +31,8 @@ export default function Module5({ onComplete }: { onComplete: () => void }) {
       wrong();
       setShowError(true);
     } else {
-      let pts = selected.length * 3;
-      if (hasCorrect) pts = 10;
+      const correctPicked = ['B', 'C', 'D'].filter(id => selected.includes(id)).length;
+      let pts = hasCorrect ? 15 : correctPicked * 5;
       addDedicated(pts);
       adjustHappiness(15);
       correct();

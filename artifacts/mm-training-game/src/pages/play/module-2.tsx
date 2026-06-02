@@ -19,7 +19,7 @@ export default function Module2({ onComplete }: { onComplete: () => void }) {
 
   const handleChoice = (isCorrect: boolean) => {
     if (isCorrect) {
-      addFriendly(8);
+      addFriendly(15);
       adjustHappiness(10);
       correct();
       onComplete();

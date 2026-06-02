@@ -11,7 +11,7 @@ export default function Module6({ onComplete }: { onComplete: () => void }) {
 
   const handleChoice = (id: string) => {
     if (id === 'C') {
-      addDedicated(10);
+      addDedicated(15);
       adjustHappiness(20);
       correct();
       onComplete();
