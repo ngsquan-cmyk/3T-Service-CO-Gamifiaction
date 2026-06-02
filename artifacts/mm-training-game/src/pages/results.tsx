@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Award } from "lucide-react";
+import { Award, ExternalLink } from "lucide-react";
 import { useGame } from "@/lib/game-context";
 import { useSoundEffects } from "@/hooks/use-sound";
 import { Button } from "@/components/ui/button";
@@ -128,6 +128,21 @@ export default function Results() {
           </div>
         ) : (
           <div className="space-y-3">
+            <a
+              href="https://training.mmvietnam.com/record-learning/AT1WlXBEm6C5cTLvPDL0bDa8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full block"
+            >
+              <Button
+                size="lg"
+                className="w-full h-14 rounded-xl text-lg font-bold bg-[#003087] hover:bg-[#002070] text-white gap-2"
+                data-testid="button-record-learning"
+              >
+                <ExternalLink className="h-5 w-5" />
+                Ghi Nhận Hoàn Thành Đào Tạo
+              </Button>
+            </a>
             <Link
               href={`/certificate?name=${encodeURIComponent(name)}&score=${totalScore}&badge=${encodeURIComponent(badge)}&friendly=${state.friendlyScore}&proficient=${state.proficientScore}&dedicated=${state.dedicatedScore}&happiness=${state.happinessPercent}&date=${new Date().toISOString().split("T")[0]}`}
               className="w-full block"
