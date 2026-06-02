@@ -5,7 +5,7 @@ import { useSoundEffects } from "@/hooks/use-sound";
 import { Button } from "@/components/ui/button";
 
 export default function Module4({ onComplete }: { onComplete: () => void }) {
-  const { addProficient, adjustHappiness } = useGame();
+  const { addDedicated, adjustHappiness } = useGame();
   const { correct, wrong } = useSoundEffects();
   const [showError, setShowError] = useState(false);
 
@@ -18,7 +18,7 @@ export default function Module4({ onComplete }: { onComplete: () => void }) {
 
   const handleSelect = (isCorrect: boolean) => {
     if (isCorrect) {
-      addProficient(15);
+      addDedicated(15);
       adjustHappiness(10);
       correct();
       onComplete();
@@ -32,8 +32,8 @@ export default function Module4({ onComplete }: { onComplete: () => void }) {
   return (
     <div className="flex flex-col h-full space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-primary mb-2">Tư Vấn Đúng</h2>
-        <p className="text-muted-foreground">Hiểu đúng nhu cầu của từng nhóm khách hàng.</p>
+        <h2 className="text-2xl font-bold text-primary mb-2">Tư Vấn Tận Tâm</h2>
+        <p className="text-muted-foreground">Hiểu đúng nhu cầu khách hàng để tư vấn phù hợp.</p>
       </div>
 
       <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 relative">
