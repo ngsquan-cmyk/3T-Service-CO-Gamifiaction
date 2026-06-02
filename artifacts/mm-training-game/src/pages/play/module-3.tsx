@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGame } from "@/lib/game-context";
 import { useSoundEffects } from "@/hooks/use-sound";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 
 type Item = { id: number; emoji: string; name: string; isDuplicate: boolean; isBulky: boolean; status: 'pending' | 'scanned' | 'skipped' };
 
@@ -20,7 +19,7 @@ const ALL_ITEMS = [
 export default function Module3({ onComplete }: { onComplete: () => void }) {
   const { addProficient, adjustHappiness, recordPaymentError } = useGame();
   const { scan, correct, wrong } = useSoundEffects();
-  
+
   const [timeLeft, setTimeLeft] = useState(30);
   const [items, setItems] = useState<Item[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,46 +27,66 @@ export default function Module3({ onComplete }: { onComplete: () => void }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [finished, setFinished] = useState(false);
 
+  // Refs always hold the latest values — no stale closures in callbacks
+  const scoreRef = useRef(0);
+  const itemsRef = useRef<Item[]>([]);
+  const finishedRef = useRef(false);
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => { onCompleteRef.current = onComplete; }, [onComplete]);
+
   useEffect(() => {
-    // Generate random queue
-    const shuffled = [...ALL_ITEMS].sort(() => Math.random() - 0.5).map((item, i) => ({ ...item, id: i, status: 'pending' as const }));
+    const shuffled = [...ALL_ITEMS]
+      .sort(() => Math.random() - 0.5)
+      .map((item, i) => ({ ...item, id: i, status: 'pending' as const }));
+    itemsRef.current = shuffled;
     setItems(shuffled);
   }, []);
 
-  useEffect(() => {
-    if (isPlaying && timeLeft > 0 && !finished) {
-      const timer = setTimeout(() => setTimeLeft(t => t - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && !finished) {
-      handleFinish();
-    }
-  }, [isPlaying, timeLeft, finished]);
-
+  // Idempotent finish — safe to call from multiple paths
   const handleFinish = () => {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
     setFinished(true);
-    let pts = 0;
-    if (score > items.length * 0.8) pts = 25;
-    else if (score > items.length * 0.5) pts = 18;
-    else pts = 10;
-    
+
+    const s = scoreRef.current;
+    const t = itemsRef.current.length;
+    let pts = 10;
+    if (t > 0) {
+      if (s > t * 0.8) pts = 25;
+      else if (s > t * 0.5) pts = 18;
+    }
+
     addProficient(pts);
     correct();
-    setTimeout(onComplete, 2000);
+    setTimeout(() => onCompleteRef.current(), 2000);
   };
 
-  const handleAction = (action: 'scan' | 'skip') => {
-    const item = items[currentIndex];
-    let correctAction = false;
-    
-    if (item.isDuplicate) {
-      correctAction = action === 'skip';
-    } else {
-      correctAction = action === 'scan';
+  // Timer countdown
+  useEffect(() => {
+    if (!isPlaying || finishedRef.current || timeLeft <= 0) return;
+    const timer = setTimeout(() => setTimeLeft(t => t - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [isPlaying, timeLeft]);
+
+  // Trigger finish when timer hits 0
+  useEffect(() => {
+    if (isPlaying && timeLeft === 0) {
+      handleFinish();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft, isPlaying]);
+
+  const handleAction = (action: 'scan' | 'skip') => {
+    if (finishedRef.current) return;
+    const item = itemsRef.current[currentIndex];
+    if (!item) return;
+
+    const correctAction = item.isDuplicate ? action === 'skip' : action === 'scan';
 
     if (correctAction) {
       scan();
-      setScore(s => s + 1);
+      scoreRef.current += 1;        // update ref immediately — no stale closure
+      setScore(scoreRef.current);   // sync UI
       adjustHappiness(2);
     } else {
       wrong();
@@ -75,11 +94,12 @@ export default function Module3({ onComplete }: { onComplete: () => void }) {
       recordPaymentError();
     }
 
-    const newItems = [...items];
-    newItems[currentIndex].status = action === 'scan' ? 'scanned' : 'skipped';
+    const newItems = [...itemsRef.current];
+    newItems[currentIndex] = { ...newItems[currentIndex], status: action === 'scan' ? 'scanned' : 'skipped' };
+    itemsRef.current = newItems;
     setItems(newItems);
 
-    if (currentIndex + 1 < items.length) {
+    if (currentIndex + 1 < itemsRef.current.length) {
       setCurrentIndex(c => c + 1);
     } else {
       handleFinish();
@@ -104,7 +124,7 @@ export default function Module3({ onComplete }: { onComplete: () => void }) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
-        <div className="font-mono text-xl font-bold bg-muted px-4 py-2 rounded-lg">
+        <div className={`font-mono text-xl font-bold px-4 py-2 rounded-lg ${timeLeft <= 10 ? 'bg-destructive/10 text-destructive' : 'bg-muted'}`}>
           {timeLeft}s
         </div>
         <div className="font-bold text-primary">
@@ -113,9 +133,8 @@ export default function Module3({ onComplete }: { onComplete: () => void }) {
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center bg-card rounded-2xl border border-border shadow-inner relative overflow-hidden mb-6">
-        {/* Conveyor belt background */}
         <div className="absolute bottom-0 w-full h-24 bg-muted/50 border-t border-border" />
-        
+
         <AnimatePresence mode="popLayout">
           {!finished && currentItem && (
             <motion.div
@@ -142,23 +161,24 @@ export default function Module3({ onComplete }: { onComplete: () => void }) {
           <div className="z-10 text-center">
             <div className="text-5xl mb-4">🎉</div>
             <h3 className="text-xl font-bold">Hoàn Thành!</h3>
+            <p className="text-muted-foreground mt-2">Đúng: {score}/{items.length}</p>
           </div>
         )}
       </div>
 
       <div className="grid grid-cols-2 gap-4 pb-4">
-        <Button 
-          variant="destructive" 
-          size="lg" 
+        <Button
+          variant="destructive"
+          size="lg"
           className="h-20 text-xl font-bold rounded-2xl shadow-sm"
           onClick={() => handleAction('skip')}
           disabled={finished}
         >
           Bỏ Qua (Trùng)
         </Button>
-        <Button 
-          variant="default" 
-          size="lg" 
+        <Button
+          variant="default"
+          size="lg"
           className="h-20 text-xl font-bold rounded-2xl shadow-sm bg-success hover:bg-success/90"
           onClick={() => handleAction('scan')}
           disabled={finished}
