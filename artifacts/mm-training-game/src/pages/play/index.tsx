@@ -14,6 +14,18 @@ import Module5 from "./module-5";
 import Module6 from "./module-6";
 import { useLocation } from "wouter";
 
+function CurrentModule({ module, onComplete }: { module: number; onComplete: () => void }) {
+  switch (module) {
+    case 1: return <Module1 onComplete={onComplete} />;
+    case 2: return <Module2 onComplete={onComplete} />;
+    case 3: return <Module3 onComplete={onComplete} />;
+    case 4: return <Module4 onComplete={onComplete} />;
+    case 5: return <Module5 onComplete={onComplete} />;
+    case 6: return <Module6 onComplete={onComplete} />;
+    default: return null;
+  }
+}
+
 export default function PlayIndex() {
   const { state, nextModule } = useGame();
   const { levelComplete } = useSoundEffects();
@@ -32,18 +44,6 @@ export default function PlayIndex() {
   const handleContinue = () => {
     setShowMotivation(false);
     nextModule();
-  };
-
-  const CurrentModule = () => {
-    switch (state.currentModule) {
-      case 1: return <Module1 onComplete={handleModuleComplete} />;
-      case 2: return <Module2 onComplete={handleModuleComplete} />;
-      case 3: return <Module3 onComplete={handleModuleComplete} />;
-      case 4: return <Module4 onComplete={handleModuleComplete} />;
-      case 5: return <Module5 onComplete={handleModuleComplete} />;
-      case 6: return <Module6 onComplete={handleModuleComplete} />;
-      default: return null;
-    }
   };
 
   return (
@@ -66,7 +66,7 @@ export default function PlayIndex() {
               </span>
             </div>
             
-            <CurrentModule />
+            <CurrentModule module={state.currentModule} onComplete={handleModuleComplete} />
             
           </motion.div>
         </AnimatePresence>
