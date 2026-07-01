@@ -129,7 +129,7 @@ export default function Results() {
         ) : (
           <div className="space-y-3">
             <a
-              href="https://training.mmvietnam.com/record-learning/AT1WlXBEm6C5cTLvPDL0bDa8"
+              href="https://training.mmvietnam.com/record-learning/verify/?v=2&token=9d0d843c56e38a390542648fad084d1d3725830ee1ca1d5169586fa495a27b8562ab1652e34c590e13a75b110d5a388fb0f1e7155ac5622314e767af4b21915190a029964b9431cf8a9e52ca27c9e5952d410a2a2df245f7a589cecd9aaf"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full block"
