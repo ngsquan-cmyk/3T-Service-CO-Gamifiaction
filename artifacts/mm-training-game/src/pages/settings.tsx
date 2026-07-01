@@ -141,7 +141,7 @@ export default function SettingsPage() {
 
   const handleResetScores = () => {
     resetScores.mutate(
-      {},
+      undefined,
       {
         onSuccess: (result) => {
           toast({
